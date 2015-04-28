@@ -4,11 +4,7 @@
 <ul>
     <% if(model.folder.link) { %>
         <li>
-            <% if(model.folder.parentLink) { %>
-                <a href="/<%= model.folder.parentLink %>/">..</a>
-            <% }else { %>
-                <a href="/">..</a>
-            <% } %>
+            <a href="/<%= model.folder.parentLink ? model.folder.parentLink + '/' : '' %>">..</a>
         </li>
     <% } %>
     <% for(var i = 0; i < model.stats.length; i++){ %>
