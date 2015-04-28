@@ -1,0 +1,38 @@
+{
+  "name": "servethis",
+  "version": "1.0.0",
+  "description": "Simple nodeJS based webserver allowing serving a local directory with a single command.",
+  "main": "bin/servethis",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "deferred": "^0.7.2",
+    "ejs": "^2.3.1",
+    "extend": "^2.0.1",
+    "open": "0.0.5",
+    "request": "^2.55.0",
+    "watch": "^0.16.0"
+  },
+  "devDependencies": {
+    "request": "^2.55.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node bin/servethis"
+  },
+  "bin": {
+    "servethis": "bin/servethis"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remolueoend/servethis.git"
+  },
+  "author": "Remo Zumsteg <r.zumsteg@icloud.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/remolueoend/servethis/issues"
+  },
+  "homepage": "https://github.com/remolueoend/servethis"
+}
