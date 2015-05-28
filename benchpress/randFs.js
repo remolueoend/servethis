@@ -1,4 +1,5 @@
 var deferred = require('deferred'),
+    q = require('q'),
     tmp = require('tmp'),
     fs = require('fs'),
     crypto = require('crypto'),
@@ -24,7 +25,9 @@ function createDir(base, opts, dirCount){
             if(!err){
                 onDirCreated(path, opts, dirCount)(function(pathes){
                     d.resolve(pathes.concat([path]));
-                });
+                }, function(err){
+                    d.reject(err);
+                }).done();
             }else{
                 d.resolve([]);
             }
@@ -83,7 +86,7 @@ function onDirCreated(path, opts, dirCount){
                 }
             });
             d.resolve(res);
-        });
+        }, function(err) { d.reject(err); }).done();
     }else{
         d.resolve([]);
     }
@@ -92,7 +95,7 @@ function onDirCreated(path, opts, dirCount){
 }
 
 module.exports = function randFs(base, options){
-    var opts = extend({}, options, DEF_OPTS);
+    var opts = extend({}, DEF_OPTS, options);
     var dc = 0;
     var dirCount = function(c){
         if(c) dc += c;

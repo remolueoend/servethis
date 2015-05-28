@@ -12,9 +12,11 @@ var ServeThis = require('../lib/servethis'),
     reqCount = parseInt(args[1]) || 1000,
     printInt, client;
 
-createFileSystem(process.cwd())(function(pathes){
+createFileSystem(process.cwd(), {dirCount: 1})(function(pathes){
 
     console.log('Created ' + pathes.length + ' items in root.');
+
+    deferred.monitor();
 
     var urls = pathes.map(function(p){
         return path.relative(process.cwd(), p);
@@ -26,6 +28,8 @@ createFileSystem(process.cwd())(function(pathes){
             client = daemon;
             client.start(['localhost:' + port, reqCount])(function(pid){
                 console.log('client started (PID: ' + pid + ')');
+            }, function(err){
+                console.error(err);
             });
         });
     });
@@ -60,9 +64,9 @@ createFileSystem(process.cwd())(function(pathes){
 
 
     app.start();
-});
+}).done();
 
-function exitHandler(options, err){
+/*function exitHandler(options, err){
     console.log('cleaning up..');
     if (err) console.log(err.stack);
     if(client) client.stop();
@@ -74,4 +78,7 @@ process.on('exit', exitHandler.bind(null,{cleanup:true}));
 //catches ctrl+c event
 process.on('SIGINT', exitHandler.bind(null, {exit:true}));
 //catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null, {exit:true}));
+process.on('uncaughtException', function(err){
+    exitHandler(err, {exit:true});
+});
+*/
