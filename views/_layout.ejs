@@ -1,16 +1,22 @@
 <html>
     <head>
         <title>
-            <%=path%>
+            <%= viewBag.title %>
         </title>
 
         <%- renderSection('head') %>
 
         <style type="text/css">
-            body{
-                font-family: "Trebuchet MS", Helvetica, sans-serif;
+            body, table{
+                font-family: "Courier New", "Trebuchet MS", Helvetica, sans-serif;
                 font-size: 14px;
                 line-height: 18px;
+            }
+            table{
+                width: 100%;
+            }
+            table > thead{
+                font-weight: bold;
             }
             .err-stack{
                 width: 100%;

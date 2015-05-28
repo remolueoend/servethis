@@ -1,6 +1,6 @@
 {
   "name": "servethis",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Simple nodeJS based webserver allowing serving a local directory with a single command.",
   "main": "bin/servethis",
   "dependencies": {
@@ -10,8 +10,12 @@
     "ejs": "^2.3.1",
     "extend": "^2.0.1",
     "mime-types": "^2.0.10",
+    "nappd": "git+https://github.com/remolueoend/nappd.git",
+    "ontrigger": "git+https://github.com/remolueoend/ontriggerJS.git",
     "open": "0.0.5",
     "request": "^2.55.0",
+    "rimraf": "^2.3.3",
+    "tmp": "0.0.26",
     "watch": "^0.16.0"
   },
   "devDependencies": {

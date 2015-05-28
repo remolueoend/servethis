@@ -1,16 +1,56 @@
+<% viewBag.title = model.req.headers.host + '/' + (model.folder.link ? model.folder.link + '/' : '') %>
+
 <h2>Directory listing for /<%= model.folder.link %></h2>
 
 <hr />
+
+<table>
+    <thead>
+        <tr>
+            <td>
+                name
+            </td>
+            <td>
+                type
+            </td>
+            <td>
+                modified
+            </td>
+            <td style="text-align: right;">
+                size
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <% if(model.folder.link) { %>
+            <tr>
+                <td colspan="4">
+                    <a href="/<%= model.folder.parentLink ? model.folder.parentLink + '/' : '' %>">..</a>
+                </td>
+            </tr>
+        <% } %>
+        <% for(var i = 0; i < model.stats.length; i++){ %>
+            <tr>
+                <td>
+                    <a href="/<%= model.stats[i].link + (model.stats[i].isDir ? '/' : '') %>">
+                        <%= model.stats[i].name %>
+                    </a>
+                </td>
+                <td>
+                    <%= model.stats[i].isDir ? 'd' : 'f' %>
+                </td>
+                <td>
+                    <%= model.stats[i].modified.toString() %>
+                </td>
+                <td style="text-align: right;">
+                    <%= model.stats[i].size %>
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
 <ul>
-    <% if(model.folder.link) { %>
-        <li>
-            <a href="/<%= model.folder.parentLink ? model.folder.parentLink + '/' : '' %>">..</a>
-        </li>
-    <% } %>
-    <% for(var i = 0; i < model.stats.length; i++){ %>
-        <li>
-            <a href="/<%= model.stats[i].link + (model.stats[i].isDir ? '/' : '') %>"><%= model.stats[i].name %></a>
-        </li>
-    <% } %>
+
 </ul>
 <hr />
